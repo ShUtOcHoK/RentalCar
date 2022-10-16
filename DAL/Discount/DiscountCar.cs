@@ -3,7 +3,7 @@
     public class DiscountCar
     {
         public int Id {get; set;}
-        public int Min_Year {get; set;}
+        public int MinYear {get; set;}
         public int Percent {get; set;}
     }
 }
