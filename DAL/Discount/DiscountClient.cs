@@ -6,8 +6,7 @@ namespace RentalCar.DAL.Discount
     {
         [Key]
         public int Id {get; set;}
-        [Required]
-        public int Count {get; set;}
+       
         [Required]
         public int Price {get; set;}
         [Required]

@@ -48,13 +48,8 @@ namespace RentalCar.Controllers
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
-          
-            return View(model);
-        }
 
-        private IEnumerable<Role> GetRoles()
-        {
-            return _context.Roles;
+            return View(model);
         }
 
         [HttpGet]
@@ -104,3 +99,4 @@ namespace RentalCar.Controllers
             return RedirectToAction("Index", "");
         }
     }
+}

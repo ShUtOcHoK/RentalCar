@@ -12,15 +12,12 @@ namespace RentalCar.DAL.Account
         [Required]
         public string LastName { get; set; }
         [Required]
-        public string Patronomic { get; set; }
+        public string Patronymic { get; set; }
         [Required]
         public string Addres { get; set; }
         [Required]
         public string Phone { get; set; }
-        [Required]
-        public int Account_Id { get; set; }
-
-        [ForeignKey(nameof(Account_Id))]
+       
         [InverseProperty(nameof(DAL.Account.Account.PersonalData))]
         public Account Account { get; set; }
 

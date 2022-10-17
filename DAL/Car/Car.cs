@@ -9,9 +9,9 @@ namespace RentalCar.DAL.Car
         [Key]
         public int Id {get;set;}
         [Required]
-        public int Name {get;set;}
+        public string Name {get;set;}
         [Required]
-        public int Number {get;set;}
+        public string Number {get;set;}
         [Required]
         public int Year { get; set; }
         [Required]
