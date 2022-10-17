@@ -19,7 +19,7 @@ namespace RentalCar.DAL
         public DbSet<PersonalData> PersonalDatas { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Car.Car> Cars { get; set; }
-        public DbSet<CarStatys> CarStatys { get; set; }
+        public DbSet<CarStatus> CarStatys { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<DiscountCar> DiscountCars { get; set; }
         public DbSet<DiscountClient> DiscountClients { get; set; }
