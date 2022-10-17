@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
+
 namespace RentalCar.DAL.Account
 {
     public class Account
@@ -16,14 +17,14 @@ namespace RentalCar.DAL.Account
         public int Role_Id {get;set;}
 
         [ForeignKey(nameof(Role_Id))] 
-        [InverseProperty(nameof(Role.Account))] 
+        [InverseProperty(nameof(DAL.Account.Role.Accounts))] 
         public Role Role { get; set; } 
 
         [Required]
         public int PersonalData_Id { get; set; }
 
         [ForeignKey(nameof(PersonalData_Id))]
-        [InverseProperty(nameof(PersonalData.Account))]
+        [InverseProperty(nameof(DAL.Account.PersonalData.Account))]
         public PersonalData PersonalData { get; set; }
 
     }
