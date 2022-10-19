@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Car>
+
+    @foreach (Car b in Model)
+    {
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <div style="text-decoration: none;" >
+                            <h3 class="mb-0">@b.Name</h3>
+                        </div>
+                        <div class="mb-1 text-muted">
+                            <a class="link-info" asp-controller="Home" asp-action="MarkCars"  asp-route-markId="@b.MarkCar_Id">
+                            @b.MarkCar.Name
+                            </a>
+                        </div>
+                        <div class="mb-1 text-muted">
+                            Дата выпуска: @b.Year г.
+                        </div>
+                    <div class="mb-1 text-muted">
+                        Тип: @b.CarType.Name
+                    </div>
+                    <div class="mb-1 text-muted">
+                        Статус: @b.CarStatus.Name
+                    </div>
+                    <div class="mb-1 text-muted">
+                        Номер машины: @b.Number 
+                    </div>
+                    <div class="mb-1 text-muted">
+                        Базовая цена за час: @b.BasePrice
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    }

@@ -31,5 +31,11 @@ namespace RentalCar.DAL.Car
         [InverseProperty(nameof(DAL.Rental.Rental.Car))]
         public ICollection<Rental.Rental> Rentals { get; set; }
 
+        [Required]
+        public int MarkCar_Id { get; set; }
+        [ForeignKey(nameof(MarkCar_Id))]
+        [InverseProperty(nameof(DAL.Car.MarkCar.Cars))]
+        public MarkCar MarkCar { get; set; }
+
     }
 }

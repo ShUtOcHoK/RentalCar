@@ -244,6 +244,9 @@ namespace RentalCar.Migrations
                     b.Property<int>("CarType_Id")
                         .HasColumnType("int");
 
+                    b.Property<int>("MarkCar_Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -261,6 +264,8 @@ namespace RentalCar.Migrations
 
                     b.HasIndex("CarType_Id");
 
+                    b.HasIndex("MarkCar_Id");
+
                     b.ToTable("Cars");
 
                     b.HasData(
@@ -270,6 +275,7 @@ namespace RentalCar.Migrations
                             BasePrice = 1500,
                             CarStatus_Id = 1,
                             CarType_Id = 1,
+                            MarkCar_Id = 1,
                             Name = "Ford",
                             Number = "CB234P",
                             Year = 2001
@@ -280,6 +286,7 @@ namespace RentalCar.Migrations
                             BasePrice = 700,
                             CarStatus_Id = 2,
                             CarType_Id = 2,
+                            MarkCar_Id = 2,
                             Name = "Honda",
                             Number = "CE254P",
                             Year = 2020
@@ -290,6 +297,7 @@ namespace RentalCar.Migrations
                             BasePrice = 1000,
                             CarStatus_Id = 2,
                             CarType_Id = 1,
+                            MarkCar_Id = 3,
                             Name = "Jeep",
                             Number = "BB238P",
                             Year = 2015
@@ -300,6 +308,7 @@ namespace RentalCar.Migrations
                             BasePrice = 600,
                             CarStatus_Id = 1,
                             CarType_Id = 2,
+                            MarkCar_Id = 4,
                             Name = "Nissan",
                             Number = "CP634P",
                             Year = 2007
@@ -310,6 +319,7 @@ namespace RentalCar.Migrations
                             BasePrice = 650,
                             CarStatus_Id = 1,
                             CarType_Id = 2,
+                            MarkCar_Id = 5,
                             Name = "Toyota",
                             Number = "CX294P",
                             Year = 2009
@@ -320,6 +330,7 @@ namespace RentalCar.Migrations
                             BasePrice = 800,
                             CarStatus_Id = 1,
                             CarType_Id = 2,
+                            MarkCar_Id = 6,
                             Name = "Lada",
                             Number = "CA847T",
                             Year = 2019
@@ -381,6 +392,55 @@ namespace RentalCar.Migrations
                         {
                             Id = 2,
                             Name = "Легковая"
+                        });
+                });
+
+            modelBuilder.Entity("RentalCar.DAL.Car.MarkCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MarkCars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Ford"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Honda"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Jeep"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Nissan"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Toyota"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Lada"
                         });
                 });
 
@@ -567,9 +627,17 @@ namespace RentalCar.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RentalCar.DAL.Car.MarkCar", "MarkCar")
+                        .WithMany("Cars")
+                        .HasForeignKey("MarkCar_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("CarStatus");
 
                     b.Navigation("CarType");
+
+                    b.Navigation("MarkCar");
                 });
 
             modelBuilder.Entity("RentalCar.DAL.Rental.Rental", b =>
@@ -626,6 +694,11 @@ namespace RentalCar.Migrations
                 });
 
             modelBuilder.Entity("RentalCar.DAL.Car.CarType", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("RentalCar.DAL.Car.MarkCar", b =>
                 {
                     b.Navigation("Cars");
                 });

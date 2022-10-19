@@ -11,7 +11,7 @@ namespace RentalCar.DAL.Account
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
+       
         public string Patronymic { get; set; }
         [Required]
         public string Addres { get; set; }

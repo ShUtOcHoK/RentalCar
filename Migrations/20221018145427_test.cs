@@ -64,6 +64,19 @@ namespace RentalCar.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MarkCars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarkCars", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PersonalDatas",
                 columns: table => new
                 {
@@ -104,7 +117,8 @@ namespace RentalCar.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     BasePrice = table.Column<int>(type: "int", nullable: false),
                     CarType_Id = table.Column<int>(type: "int", nullable: false),
-                    CarStatus_Id = table.Column<int>(type: "int", nullable: false)
+                    CarStatus_Id = table.Column<int>(type: "int", nullable: false),
+                    MarkCar_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,6 +133,12 @@ namespace RentalCar.Migrations
                         name: "FK_Cars_CarTypes_CarType_Id",
                         column: x => x.CarType_Id,
                         principalTable: "CarTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_MarkCars_MarkCar_Id",
+                        column: x => x.MarkCar_Id,
+                        principalTable: "MarkCars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -243,6 +263,19 @@ namespace RentalCar.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "MarkCars",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Ford" },
+                    { 2, "Honda" },
+                    { 3, "Jeep" },
+                    { 4, "Nissan" },
+                    { 5, "Toyota" },
+                    { 6, "Lada" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "PersonalDatas",
                 columns: new[] { "Id", "Addres", "FirstName", "LastName", "Patronymic", "Phone" },
                 values: new object[,]
@@ -280,15 +313,15 @@ namespace RentalCar.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "BasePrice", "CarStatus_Id", "CarType_Id", "Name", "Number", "Year" },
+                columns: new[] { "Id", "BasePrice", "CarStatus_Id", "CarType_Id", "MarkCar_Id", "Name", "Number", "Year" },
                 values: new object[,]
                 {
-                    { 1, 1500, 1, 1, "Ford", "CB234P", 2001 },
-                    { 2, 700, 2, 2, "Honda", "CE254P", 2020 },
-                    { 3, 1000, 2, 1, "Jeep", "BB238P", 2015 },
-                    { 4, 600, 1, 2, "Nissan", "CP634P", 2007 },
-                    { 5, 650, 1, 2, "Toyota", "CX294P", 2009 },
-                    { 6, 800, 1, 2, "Lada", "CA847T", 2019 }
+                    { 1, 1500, 1, 1, 1, "Ford", "CB234P", 2001 },
+                    { 2, 700, 2, 2, 2, "Honda", "CE254P", 2020 },
+                    { 3, 1000, 2, 1, 3, "Jeep", "BB238P", 2015 },
+                    { 4, 600, 1, 2, 4, "Nissan", "CP634P", 2007 },
+                    { 5, 650, 1, 2, 5, "Toyota", "CX294P", 2009 },
+                    { 6, 800, 1, 2, 6, "Lada", "CA847T", 2019 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -311,6 +344,11 @@ namespace RentalCar.Migrations
                 name: "IX_Cars_CarType_Id",
                 table: "Cars",
                 column: "CarType_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_MarkCar_Id",
+                table: "Cars",
+                column: "MarkCar_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_Car_Id",
@@ -360,6 +398,9 @@ namespace RentalCar.Migrations
 
             migrationBuilder.DropTable(
                 name: "CarTypes");
+
+            migrationBuilder.DropTable(
+                name: "MarkCars");
         }
     }
 }

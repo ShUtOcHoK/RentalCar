@@ -21,13 +21,19 @@ namespace RentalCar.Models.Account
         [Required(ErrorMessage = "Не указана Фамилия")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Не указана Отчество")]
-        public string Patronomic { get; set; 
-        }
+        public string Middlename { get; set; }
+        [Required(ErrorMessage = "Не указан адресс")]
+        public string Addres { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Не указан номер телефона")]
         public string Phone { get; set; }
 
+        [Required(ErrorMessage = "Не указана роль")]
+        public int RoleId { get; set; } = 3;
+
+        public IEnumerable<Role>? Roles { get; set; }
     }
+
 }
+

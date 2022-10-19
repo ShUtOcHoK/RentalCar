@@ -1,8 +1,49 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Машины";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model CarsModel
+
+<link rel="stylesheet" href="~/css/books.css" />
+<main class="container-xxl flex-shrink-0">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container">
+                        <div class="row">
+                            <form asp-action="Index" asp-controller="Home" class="d-flex">
+                                <input asp-for="SearchText" class="form-control me-2" type="search" placeholder="Название машины">
+                                <button class="btn btn-outline-success" type="submit">Поиск</button>
+                            </form>
+                        </div>
+                        <div class="row">
+                            @foreach (MarkCar a in Model.MarkCars)
+                            {
+                                <a style="text-decoration: none;" asp-controller="Home" asp-action="MarkCars" asp-route-markId="@a.Id" >
+                                    @a.Name
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    @if (Model.SearchText != "")
+                    {
+                        <h4>Результат поиска: @Model.SearchText</h4>
+                    }
+
+                    @if (Model.Cars is not null && Model.Cars.Count() != 0)
+                    {
+                        @await Html.PartialAsync("PartialView/CarsList", Model.Cars)
+                    }
+                    else
+                    {
+                        <h3>По вашему зпросу ничего не найдено</h3>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
